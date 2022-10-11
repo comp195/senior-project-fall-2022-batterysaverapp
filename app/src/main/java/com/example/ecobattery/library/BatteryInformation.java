@@ -7,9 +7,6 @@ import android.os.BatteryManager;
 
 public class BatteryInformation {
 
-    /*
-    TODO Test with drained battery
-     */
     public static float getBatteryPercentage(Context context) {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = context.registerReceiver(null, intentFilter);
@@ -24,9 +21,13 @@ public class BatteryInformation {
     TODO Calculate estimated time
     Research suggests we should gather data to analyze.
     https://stackoverflow.com/questions/30208271/calculating-remaining-time-of-battery-live
+    Consider BatteryManager.computeChargeTimeRemaining() function from API 28
      */
     public static int getEstimatedTime() {
         return -1;
+    }
+
+    public static boolean isCharging(Context context) {
     }
 
 }
