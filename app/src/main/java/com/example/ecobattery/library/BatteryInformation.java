@@ -39,7 +39,7 @@ public class BatteryInformation {
     }
 
     /*
-    TODO Figure out how to calculate getBatteryPercentage() + extra battery life
+    TODO Calculate getBatteryPercentage() + extra battery life
      */
     public static float getBatteryLife() {
         return -1;
@@ -47,6 +47,20 @@ public class BatteryInformation {
 
     public static boolean isLowBattery(Context context) {
         return getBatteryPercentage(context) <= LOW_BATTERY_THRESHOLD;
+    }
+
+    /*
+    TODO Calculate time to charge
+    Research suggests gather data to analyze.
+    One approach:
+    - Theoretically, battery is at 20%.
+    - Start timer from 21%
+    - End timer at 22%
+    - Multiply 78 by (end-start) time to get "estimate".
+    NOTE: Start timer from 21% because charge from 20% to 21% may vary if it's theoretically 20.9%.
+     */
+    public static int getTimeToCharge() {
+        return -1;
     }
 
 }
