@@ -7,6 +7,8 @@ import android.os.BatteryManager;
 
 public class BatteryInformation {
 
+    private static final int LOW_BATTERY_THRESHOLD = 20;
+
     public static float getBatteryPercentage(Context context) {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = context.registerReceiver(null, intentFilter);
@@ -41,6 +43,10 @@ public class BatteryInformation {
      */
     public static float getBatteryLife() {
         return -1;
+    }
+
+    public static boolean isLowBattery(Context context) {
+        return getBatteryPercentage(context) <= LOW_BATTERY_THRESHOLD;
     }
 
 }
