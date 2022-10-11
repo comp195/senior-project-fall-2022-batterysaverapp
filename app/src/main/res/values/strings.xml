@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EcoBattery</string>
+    <string name="battery_information">Battery Information</string>
+    <string name="battery_saver_mode">Battery Saver Mode</string>
+    <string name="ecobattery">ECOBATTERY</string>
+    <string name="todo">TODO</string>
 </resources>
