@@ -36,4 +36,11 @@ public class BatteryInformation {
         return status == BatteryManager.BATTERY_STATUS_CHARGING;
     }
 
+    /*
+    TODO Figure out how to calculate getBatteryPercentage() + extra battery life
+     */
+    public static float getBatteryLife() {
+        return -1;
+    }
+
 }
