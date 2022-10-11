@@ -8,4 +8,14 @@ public class BatteryInformation {
         return BatteryManager.BATTERY_PROPERTY_CAPACITY;
     }
 
+    /*
+    TODO Calculate estimated time
+    Research suggests we should gather data to analyze.
+    https://stackoverflow.com/questions/30208271/calculating-remaining-time-of-battery-live
+     */
+    public int getEstimatedTime() {
+        return -1;
+    }
+
+
 }
