@@ -30,4 +30,5 @@ These are the project components in general:
 # Special notes
 None as of now but will be incorporated during the semester
 had a hard time figuring out vcs
+mah figured
 
