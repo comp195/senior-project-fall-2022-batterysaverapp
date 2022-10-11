@@ -28,6 +28,12 @@ public class BatteryInformation {
     }
 
     public static boolean isCharging(Context context) {
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = context.registerReceiver(null, intentFilter);
+
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+
+        return status == BatteryManager.BATTERY_STATUS_CHARGING;
     }
 
 }
