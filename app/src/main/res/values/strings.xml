@@ -5,4 +5,6 @@
     <string name="ecobattery">ECOBATTERY</string>
     <string name="todo">TODO</string>
     <string name="battery_information_page">Battery Information Page</string>
+    <string name="battery_life">Battery Life</string>
+    <string name="battery_percentage">Battery Percentage</string>
 </resources>
