@@ -4,4 +4,5 @@
     <string name="battery_saver_mode">Battery Saver Mode</string>
     <string name="ecobattery">ECOBATTERY</string>
     <string name="todo">TODO</string>
+    <string name="battery_information_page">Battery Information Page</string>
 </resources>
