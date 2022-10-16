@@ -64,4 +64,10 @@
         app:srcCompat="@drawable/battery"
         android:contentDescription="@string/todo1"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/battery_percentage" />
 </RelativeLayout>

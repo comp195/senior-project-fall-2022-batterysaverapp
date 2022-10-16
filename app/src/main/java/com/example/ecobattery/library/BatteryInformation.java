@@ -40,7 +40,9 @@ public class BatteryInformation {
 
     /*
     TODO Calculate getBatteryPercentage() + extra battery life
+    Some physics calculation to calculate this
      */
+
     public static float getBatteryLife() {
         return -1;
     }
