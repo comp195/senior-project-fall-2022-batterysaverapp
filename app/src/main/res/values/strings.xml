@@ -7,5 +7,6 @@
     <string name="battery_information_page">Battery Information Page</string>
     <string name="battery_life">Battery Life</string>
     <string name="battery_percentage">Battery Percentage</string>
+    <string name="is_charging">Is Charging</string>
     <string name="todo1">TODO</string>
 </resources>
