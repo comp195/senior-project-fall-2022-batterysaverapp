@@ -19,5 +19,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         TextView isChargingText = (TextView)findViewById(R.id.textView5);
         isChargingText.setText("Is Charging: " + String.valueOf(BatteryInformation.isCharging(getBaseContext())));
+
+        TextView isLowBatteryText = (TextView)findViewById(R.id.textView6);
+        isLowBatteryText.setText("Is Low Battery: " + String.valueOf(BatteryInformation.isLowBattery(getBaseContext())));
     }
 }
