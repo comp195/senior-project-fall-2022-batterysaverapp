@@ -9,6 +9,10 @@ import com.example.ecobattery.library.BatteryInformation;
 
 public class MainActivity2 extends AppCompatActivity {
 
+    /*
+    TODO: Consider live update on information
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
