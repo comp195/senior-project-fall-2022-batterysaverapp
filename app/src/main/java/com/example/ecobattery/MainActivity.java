@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ecobattery.library.BatteryInformation;
+import com.example.ecobattery.library.Optimization;
 //import android.view.View;
 //import android.widget.Button;
 
@@ -16,7 +17,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*
+        TODO simplify this code
+         */
         BatteryInformation.setAppContext(getApplicationContext());
+        Optimization.setAppContext(getApplicationContext());
     }
 
     public void batteryInfoScreen(View view) {
