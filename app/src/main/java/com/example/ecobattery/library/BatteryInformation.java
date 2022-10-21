@@ -7,11 +7,17 @@ import android.os.BatteryManager;
 
 public class BatteryInformation {
 
+    private static Context appContext;
+
     private static final int LOW_BATTERY_THRESHOLD = 20;
 
-    public static float getBatteryPercentage(Context context) {
+    public static void setAppContext(Context newContext) {
+        appContext = newContext;
+    }
+
+    public static float getBatteryPercentage() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        Intent batteryStatus = context.registerReceiver(null, intentFilter);
+        Intent batteryStatus = appContext.registerReceiver(null, intentFilter);
 
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -29,9 +35,9 @@ public class BatteryInformation {
         return -1;
     }
 
-    public static boolean isCharging(Context context) {
+    public static boolean isCharging() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        Intent batteryStatus = context.registerReceiver(null, intentFilter);
+        Intent batteryStatus = appContext.registerReceiver(null, intentFilter);
 
         int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
 
@@ -47,8 +53,8 @@ public class BatteryInformation {
         return -1;
     }
 
-    public static boolean isLowBattery(Context context) {
-        return getBatteryPercentage(context) <= LOW_BATTERY_THRESHOLD;
+    public static boolean isLowBattery() {
+        return getBatteryPercentage() <= LOW_BATTERY_THRESHOLD;
     }
 
     /*
