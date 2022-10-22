@@ -14,18 +14,9 @@ public class Optimization {
         appContext = newContext;
     }
 
+    //TODO Root android device and save battery!
     public void terminateApplications() {
-        ActivityManager am = (ActivityManager) appContext.getSystemService(Context.ACTIVITY_SERVICE);
-
-        System.out.println("TODO X Y D Z SJAJHJRHA A");
-
-        for (ActivityManager.RunningAppProcessInfo pid : am.getRunningAppProcesses()) {
-            if (!pid.processName.equalsIgnoreCase("com.example.ecobattery")) {
-
-                System.out.println("Process Being Killed: " + pid.processName);
-                //am.killBackgroundProcesses(pid.processName);
-            }
-        }
+        // TODO
     }
 
 }
