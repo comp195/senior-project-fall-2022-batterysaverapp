@@ -8,8 +8,6 @@ import android.view.View;
 
 import com.example.ecobattery.library.BatteryInformation;
 import com.example.ecobattery.library.Optimization;
-//import android.view.View;
-//import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void batteryInfoScreen(View view) {
         Intent intent = new Intent(this, InformationActivity.class);
+        startActivity(intent);
+    }
+
+    public void batterySaverScreen(View view) {
+        Intent intent = new Intent(this, SaverActivity.class);
         startActivity(intent);
     }
 }
