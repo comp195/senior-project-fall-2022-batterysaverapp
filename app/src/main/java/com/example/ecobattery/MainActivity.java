@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void batteryInfoScreen(View view) {
-        Intent intent = new Intent(this, MainActivity2.class);
+        Intent intent = new Intent(this, InformationActivity.class);
         startActivity(intent);
     }
 }

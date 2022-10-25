@@ -23,21 +23,7 @@
         android:theme="@style/Theme.EcoBattery"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SaverActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".DataActivity"
+            android:name=".InformationActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
