@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.ecobattery.library.BatteryInformation;
-import com.example.ecobattery.library.Optimization;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -18,8 +17,6 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Optimization optimization = new Optimization();
-        optimization.terminateApplications();
 
         TextView batteryPercentText = (TextView)findViewById(R.id.textView4);
         batteryPercentText.setText("Battery Percentage: " + String.valueOf(BatteryInformation.getBatteryPercentage()));
