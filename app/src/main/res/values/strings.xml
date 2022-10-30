@@ -13,6 +13,7 @@
     <string name="red">red</string>
     <string name="blue">bloo</string>
     <string name="green">shrek</string>
+    <string name="app_view">Applications</string>
     <string name="second_view">Second View</string>
     <string name="swipe_left_to_nfirst_view">Swipe left to\nFirst View</string>
     <string name="swipe_right_to_nthird_view">Swipe right to\nThird View</string>
