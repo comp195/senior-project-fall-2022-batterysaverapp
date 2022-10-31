@@ -3,6 +3,10 @@ package com.example.ecobattery.library;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.media.Image;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -17,7 +21,7 @@ import java.util.List;
 public class SaverPagerAdapter extends PagerAdapter {
 
     private Context mContext;
-    private DisplayApp[] applicationArray;
+    public DisplayApp[] applicationArray;
 
     public SaverPagerAdapter(Context context) {
         mContext = context;
@@ -46,8 +50,11 @@ public class SaverPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
 
-        int widthOfContext = layout.getWidth();
-        int heightOfContext = layout.getHeight();
+        int widthOfContext = 1080;
+        int heightOfContext = 1920;
+
+        System.out.println(widthOfContext);
+        System.out.println(heightOfContext);
 
         int widthApp = widthOfContext / 5;
         int heightApp = heightOfContext / 5;
@@ -56,16 +63,27 @@ public class SaverPagerAdapter extends PagerAdapter {
         int currentY = 0;
 
         for (DisplayApp displayApp : applicationArray) {
+
             ImageView appImageView = new ImageView(mContext);
+
             appImageView.setImageDrawable(displayApp.getIcon());
 
             appImageView.setX(currentX);
             appImageView.setY(currentY);
 
             currentX += widthApp;
-            currentY += heightApp;
+
+            if (currentX == 1080) {
+                currentY += heightApp;
+                currentX = 0;
+            }
+
 
             layout.addView(appImageView);
+
+            appImageView.requestLayout();
+            appImageView.getLayoutParams().height = 200;
+            appImageView.getLayoutParams().width = 200;
         }
 
         collection.addView(layout);
