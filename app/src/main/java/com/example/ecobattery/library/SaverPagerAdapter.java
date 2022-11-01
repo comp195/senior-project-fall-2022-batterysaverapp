@@ -15,101 +15,75 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaverPagerAdapter extends PagerAdapter {
 
-    private Context mContext;
-    public DisplayApp[] applicationArray;
+    // This holds all the currently displayable views, in order from left to right.
+    private ArrayList<View> views = new ArrayList<View>();
 
-    public SaverPagerAdapter(Context context) {
-        mContext = context;
-
-        initializeApplicationArray();
-    }
-
-    public void initializeApplicationArray() {
-        final PackageManager pm = mContext.getPackageManager();
-        ApplicationInfo[] packages = pm.getInstalledApplications(PackageManager.GET_META_DATA).toArray(new ApplicationInfo[0]);
-
-        applicationArray = new DisplayApp[packages.length];
-
-        for (int i = 0; i < packages.length; i++) {
-            applicationArray[i] = new DisplayApp(false, pm.getApplicationIcon(packages[i]), "test");
-        }
-
-        for (int i = 0; i < applicationArray.length; i++) {
-            System.out.println(applicationArray[i].getIcon());
-        }
+    @Override
+    public int getItemPosition (Object object) {
+        int index = views.indexOf (object);
+        if (index == -1)
+            return POSITION_NONE;
+        else
+            return index;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup collection, int position) {
-        ModelObject modelObject = ModelObject.values()[position];
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
-
-        int widthOfContext = 1080;
-        int heightOfContext = 1920;
-
-        System.out.println(widthOfContext);
-        System.out.println(heightOfContext);
-
-        int widthApp = widthOfContext / 5;
-        int heightApp = heightOfContext / 5;
-
-        int currentX = 0;
-        int currentY = 0;
-
-        for (DisplayApp displayApp : applicationArray) {
-
-            ImageView appImageView = new ImageView(mContext);
-
-            appImageView.setImageDrawable(displayApp.getIcon());
-
-            appImageView.setX(currentX);
-            appImageView.setY(currentY);
-
-            currentX += widthApp;
-
-            if (currentX == 1080) {
-                currentY += heightApp;
-                currentX = 0;
-            }
-
-
-            layout.addView(appImageView);
-
-            appImageView.requestLayout();
-            appImageView.getLayoutParams().height = 200;
-            appImageView.getLayoutParams().width = 200;
-        }
-
-        collection.addView(layout);
-
-        return layout;
+    public Object instantiateItem (ViewGroup container, int position) {
+        View v = views.get (position);
+        container.addView (v);
+        return v;
     }
 
     @Override
-    public void destroyItem(ViewGroup collection, int position, Object view) {
-        collection.removeView((View) view);
+    public void destroyItem (ViewGroup container, int position, Object object) {
+        container.removeView (views.get (position));
     }
 
     @Override
-    public int getCount() {
-        return ModelObject.values().length;
+    public int getCount () {
+        return views.size();
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject (View view, Object object) {
         return view == object;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        ModelObject customPagerEnum = ModelObject.values()[position];
-        return mContext.getString(customPagerEnum.getTitleResId());
+    public int addView (View v) {
+        return addView (v, views.size());
     }
+
+    public int addView (View v, int position) {
+        views.add (position, v);
+        return position;
+    }
+
+    public int removeView (ViewPager pager, View v) {
+        return removeView (pager, views.indexOf (v));
+    }
+
+    public int removeView (ViewPager pager, int position) {
+        pager.setAdapter (null);
+        views.remove (position);
+        pager.setAdapter (this);
+
+        return position;
+    }
+
+    public View getView (int position) {
+        return views.get (position);
+    }
+
+    // Other relevant methods:
+
+    // finishUpdate - called by the ViewPager - we don't care about what pages the
+    // pager is displaying so we don't use this method.
 
 }
