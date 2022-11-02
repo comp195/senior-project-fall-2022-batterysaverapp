@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.ecobattery.library.BatteryInformation;
 import com.example.ecobattery.library.Optimization;
+import com.example.ecobattery.library.OptimizationFileConfig;
 
 public class MainActivity extends AppCompatActivity {
 

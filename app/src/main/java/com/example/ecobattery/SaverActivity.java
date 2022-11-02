@@ -2,17 +2,20 @@ package com.example.ecobattery;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.ecobattery.library.DisplayApp;
+import com.example.ecobattery.library.OptimizationFileConfig;
 import com.example.ecobattery.library.SaverPagerAdapter;
 
 public class SaverActivity extends AppCompatActivity {
@@ -51,9 +54,27 @@ public class SaverActivity extends AppCompatActivity {
                     ImageView appImageView = new ImageView(v.getContext());
 
                     appImageView.setImageDrawable(applicationArray[x][y].getIcon());
+                    appImageView.setContentDescription(applicationArray[x][y].getPackageName());
 
                     appImageView.setX(currentX);
                     appImageView.setY(currentY);
+
+                    int finalX = x;
+                    int finalY = y;
+                    View.OnClickListener clickListener = new View.OnClickListener() {
+                        public void onClick(View v) {
+                            System.out.println(applicationArray[finalX][finalY].getPackageName());
+                            //OptimizationFileConfig.addPackage(applicationArray[finalX][finalY].getPackageName());
+                        }
+                    };
+                    appImageView.setOnClickListener(clickListener);
+
+                    TextView appTextView = new TextView(v.getContext());
+
+                    appTextView.setText(applicationArray[x][y].getName());
+
+                    appTextView.setX(currentX);
+                    appTextView.setY(currentY + (heightApp / 2));
 
                     currentX += widthApp;
 
@@ -64,6 +85,7 @@ public class SaverActivity extends AppCompatActivity {
 
 
                     v.addView(appImageView);
+                    v.addView(appTextView);
 
                     appImageView.requestLayout();
                     appImageView.getLayoutParams().height = 200;
@@ -83,7 +105,7 @@ public class SaverActivity extends AppCompatActivity {
 
         int x = 0;
         for (int i = 0; i < packages.length; i++) {
-            applicationArray[x][i % 25] = new DisplayApp(false, pm.getApplicationIcon(packages[i]), "test");
+            applicationArray[x][i % 25] = new DisplayApp(packages[i].packageName, false, pm.getApplicationIcon(packages[i]), pm.getApplicationLabel(packages[i]).toString());
             if (i != 0 && i % 25 == 0) {
                 x += 1;
             }
