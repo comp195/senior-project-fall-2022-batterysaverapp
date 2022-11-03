@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ecobattery.library.BatteryInformation;
-import com.example.ecobattery.library.Optimization;
-import com.example.ecobattery.library.OptimizationFileConfig;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         TODO simplify this code
          */
         BatteryInformation.setAppContext(getApplicationContext());
-        Optimization.setAppContext(getApplicationContext());
     }
 
     public void batteryInfoScreen(View view) {

@@ -32,6 +32,8 @@ public class SaverActivity extends AppCompatActivity {
 
         initializeApplicationArray();
 
+        OptimizationFileConfig optimizationFileConfig = new OptimizationFileConfig(getApplicationContext());
+
         pagerAdapter = new SaverPagerAdapter();
         pager = (ViewPager) findViewById (R.id.pager);
         pager.setAdapter (pagerAdapter);
@@ -64,7 +66,7 @@ public class SaverActivity extends AppCompatActivity {
                     View.OnClickListener clickListener = new View.OnClickListener() {
                         public void onClick(View v) {
                             System.out.println(applicationArray[finalX][finalY].getPackageName());
-                            //OptimizationFileConfig.addPackage(applicationArray[finalX][finalY].getPackageName());
+                            optimizationFileConfig.processPackage(applicationArray[finalX][finalY].getPackageName());
                         }
                     };
                     appImageView.setOnClickListener(clickListener);
