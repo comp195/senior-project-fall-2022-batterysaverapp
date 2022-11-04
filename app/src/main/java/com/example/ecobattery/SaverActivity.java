@@ -1,6 +1,7 @@
 package com.example.ecobattery;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
@@ -36,6 +37,9 @@ public class SaverActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        int currentPage = intent.getIntExtra("current_page", 0);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.saver_activity);
 
@@ -80,6 +84,18 @@ public class SaverActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 System.out.println(optAppDisplayArray[finalX][finalY].getPackageName());
                                 optFileConfig.processPackage(optAppDisplayArray[finalX][finalY].getPackageName());
+                                finish();
+                                overridePendingTransition(0, 0);
+                                Intent newIntent = getIntent();
+                                newIntent.putExtra("current_page", finalX);
+                                startActivity(getIntent());
+                                pager.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        pager.setCurrentItem(finalX);
+                                    }
+                                });//TODO fix bound cases
+                                overridePendingTransition(0, 0);
                             }
                         };
                         appImageView.setOnClickListener(clickListener);
@@ -132,6 +148,12 @@ public class SaverActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 System.out.println(allAppDisplayArray[finalX][finalY].getPackageName());
                                 optFileConfig.processPackage(allAppDisplayArray[finalX][finalY].getPackageName());
+                                finish();
+                                overridePendingTransition(0, 0);
+                                Intent newIntent = getIntent();
+                                newIntent.putExtra("current_page", finalX + optAppDisplayArray.length);
+                                startActivity(getIntent());
+                                overridePendingTransition(0, 0);
                             }
                         };
                         appImageView.setOnClickListener(clickListener);
@@ -162,6 +184,8 @@ public class SaverActivity extends AppCompatActivity {
                 pagerAdapter.notifyDataSetChanged();
             }
         }
+
+        pager.setCurrentItem(currentPage);
     }
 
     public void initializePackagesFilter() {
