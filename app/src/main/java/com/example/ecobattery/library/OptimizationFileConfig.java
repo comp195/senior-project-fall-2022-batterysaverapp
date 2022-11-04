@@ -23,6 +23,10 @@ public class OptimizationFileConfig {
         initializeFile();
     }
 
+    public List<String> getOptimizedPackages() {
+        return optimizedPackages;
+    }
+
     private void initializeFile() {
         file = new File(appContext.getFilesDir(), "optimized_packages.txt");
         optimizedPackages = new ArrayList<>();
@@ -49,7 +53,7 @@ public class OptimizationFileConfig {
         }
     }
 
-    private boolean doesPackageExist(String packageToCheck) {
+    public boolean doesPackageExist(String packageToCheck) {
         for (String packages : optimizedPackages) {
             if (packages.equalsIgnoreCase(packageToCheck)) {
                 return true;
