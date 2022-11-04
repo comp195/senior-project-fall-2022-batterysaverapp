@@ -32,6 +32,8 @@ public class SaverActivity extends AppCompatActivity {
     public DisplayApp[][] optAppDisplayArray;
     public DisplayApp[][] allAppDisplayArray;
 
+    private String[] packagesFilter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class SaverActivity extends AppCompatActivity {
 
         optFileConfig = new OptimizationFileConfig(getApplicationContext());
 
+        initializePackagesFilter();
         initializeApplicationsArray();
 
         setContentView(R.layout.saver_activity);
@@ -75,6 +78,7 @@ public class SaverActivity extends AppCompatActivity {
                         int finalY = y;
                         View.OnClickListener clickListener = new View.OnClickListener() {
                             public void onClick(View v) {
+                                System.out.println(optAppDisplayArray[finalX][finalY].getPackageName());
                                 optFileConfig.processPackage(optAppDisplayArray[finalX][finalY].getPackageName());
                             }
                         };
@@ -126,6 +130,7 @@ public class SaverActivity extends AppCompatActivity {
                         int finalY = y;
                         View.OnClickListener clickListener = new View.OnClickListener() {
                             public void onClick(View v) {
+                                System.out.println(allAppDisplayArray[finalX][finalY].getPackageName());
                                 optFileConfig.processPackage(allAppDisplayArray[finalX][finalY].getPackageName());
                             }
                         };
@@ -157,61 +162,64 @@ public class SaverActivity extends AppCompatActivity {
                 pagerAdapter.notifyDataSetChanged();
             }
         }
+    }
 
-        /*
-
-        for (int x = 0; x < applicationArray.length; x++) {
-            int currentX = 0;
-            int currentY = 0;
-
-            RelativeLayout v = (RelativeLayout) inflater.inflate (R.layout.view_apps, null);
-            for (int y = 0; y < applicationArray[x].length; y++) {
-                if (applicationArray[x][y] != null) {
-                    ImageView appImageView = new ImageView(v.getContext());
-
-                    appImageView.setImageDrawable(applicationArray[x][y].getIcon());
-                    appImageView.setContentDescription(applicationArray[x][y].getPackageName());
-
-                    appImageView.setX(currentX);
-                    appImageView.setY(currentY);
-
-                    int finalX = x;
-                    int finalY = y;
-                    View.OnClickListener clickListener = new View.OnClickListener() {
-                        public void onClick(View v) {
-                            System.out.println(applicationArray[finalX][finalY].getPackageName());
-                            optimizationFileConfig.processPackage(applicationArray[finalX][finalY].getPackageName());
-                        }
-                    };
-                    appImageView.setOnClickListener(clickListener);
-
-                    TextView appTextView = new TextView(v.getContext());
-
-                    appTextView.setText(applicationArray[x][y].getName());
-
-                    appTextView.setX(currentX);
-                    appTextView.setY(currentY + (heightApp / 2));
-
-                    currentX += widthApp;
-
-                    if (currentX == 1080) {
-                        currentY += heightApp;
-                        currentX = 0;
-                    }
-
-
-                    v.addView(appImageView);
-                    v.addView(appTextView);
-
-                    appImageView.requestLayout();
-                    appImageView.getLayoutParams().height = 200;
-                    appImageView.getLayoutParams().width = 200;
-                }
+    public void initializePackagesFilter() {
+        packagesFilter = new String[]{
+                "com.google.android.cellbroadcastservice",
+                "com.android.keychain",
+                "com.android.dynsystem",
+                "com.android.providers.media",
+                "com.android.wallpapercropper",
+                "com.android.externalstorage",
+                "com.android.companiondevicemanager",
+                "com.android.mms.service",
+                "com.google.android.providers.media.module",
+                "com.android.systemui.plugin.globalactions.wallet",
+                "com.android.pacprocessor",
+                "com.google.android.adservices.api",
+                "com.android.certinstaller",
+                "com.android.carrierconfig",
+                "com.android.mtp",
+                "com.android.ons",
+                "com.android.backupconfirm",
+                "com.android.emulator.radio.config",
+                "com.android.sharedstoragebackup",
+                "com.android.se",
+                "com.android.inputdevices",
+                "com.android.internal.display.cutout.emulation.emu01",
+                "com.android.cellbroadcastreceiver",
+                "com.google.android.bluetooth.services",
+                "com.google.android.networkstack",
+                "com.google.android.gsf",
+                "com.android.calllogbackup",
+                "com.android.cameraextensions",
+                "com.android.localtransport",
+                "com.android.proxyhandler",
+                "com.android.managedprovisioning",
+                "com.android.soundpicker",
+                "com.google.android.systemui.gxoverlay",
+                "com.android.emulator.multidisplay",
+                "com.google.android.sdksetup",
+                "com.google.android.gms.supervision",
+                "com.android.vpndialogs",
+                "com.android.shell",
+                "com.android.wallpaperbackup",
+                "com.android.providers.blockednumber",
+                "com.android.providers.userdictionary",
+                "com.android.location.fused",
+                "com.google.android.ondevicepersonalization.services",
+                "com.android.providers.contacts"
+        };
+    }
+    
+    public boolean isPackageFiltered(String packageToCheck) {
+        for (String packages : packagesFilter) {
+            if (packages.equalsIgnoreCase(packageToCheck)) {
+                return true;
             }
-            pagerAdapter.addView (v, x);
-            pagerAdapter.notifyDataSetChanged();
         }
-         */
+        return false;
     }
 
     public void initializeApplicationsArray() {
@@ -225,7 +233,11 @@ public class SaverActivity extends AppCompatActivity {
 
         int allAppInfoSize = allAppInfo.size();
         for (int i = 0; i < allAppInfoSize; i++) {
-            if (optFileConfig.doesPackageExist(allAppInfo.get(i).packageName)) {
+            if (isPackageFiltered(allAppInfo.get(i).packageName)) {
+                allAppInfo.remove(allAppInfo.get(i));
+                i--;
+                allAppInfoSize--;
+            } else if (optFileConfig.doesPackageExist(allAppInfo.get(i).packageName)) {
                 optAppInfo.add(allAppInfo.get(i));
                 allAppInfo.remove(allAppInfo.get(i));
                 i--;
@@ -233,31 +245,35 @@ public class SaverActivity extends AppCompatActivity {
             }
         }
 
-        int allAppDisplayArraySize = (int) Math.ceil(((double) allAppInfo.size() - 1) / 25) + 1;
+        int allAppDisplayArraySize = (int) Math.ceil(((double) allAppInfo.size()) / 25);
         allAppDisplayArray = new DisplayApp[allAppDisplayArraySize][25];
 
-        int x = 0;
-        for (int i = 0; i < allAppInfo.size(); i++) {
-            allAppDisplayArray[x][i % 25] = new DisplayApp(allAppInfo.get(i).packageName,
-                    false,
-                    pm.getApplicationIcon(allAppInfo.get(i)),
-                    pm.getApplicationLabel(allAppInfo.get(i)).toString());
-            if (i != 0 && i % 25 == 0) {
-                x += 1;
+        if (allAppDisplayArraySize > 0) {
+            int x = 0;
+            for (int i = 0; i < allAppInfo.size(); i++) {
+                allAppDisplayArray[x][i % 25] = new DisplayApp(allAppInfo.get(i).packageName,
+                        false,
+                        pm.getApplicationIcon(allAppInfo.get(i)),
+                        pm.getApplicationLabel(allAppInfo.get(i)).toString());
+                if (i != 0 && i % 25 == 0) {
+                    x += 1;
+                }
             }
         }
 
-        int optAppDisplayArraySize = (int) Math.ceil(((double) optAppInfo.size() - 1) / 25) + 1;
+        int optAppDisplayArraySize = (int) Math.ceil(((double) optAppInfo.size()) / 25);
         optAppDisplayArray = new DisplayApp[optAppDisplayArraySize][25];
 
-        x = 0;
-        for (int i = 0; i < optAppInfo.size(); i++) {
-            optAppDisplayArray[x][i % 25] = new DisplayApp(optAppInfo.get(i).packageName,
-                    false,
-                    pm.getApplicationIcon(optAppInfo.get(i)),
-                    pm.getApplicationLabel(optAppInfo.get(i)).toString());
-            if (i != 0 && i % 25 == 0) {
-                x += 1;
+        if (optAppDisplayArraySize > 0) {
+            int x = 0;
+            for (int i = 0; i < optAppInfo.size(); i++) {
+                optAppDisplayArray[x][i % 25] = new DisplayApp(optAppInfo.get(i).packageName,
+                        false,
+                        pm.getApplicationIcon(optAppInfo.get(i)),
+                        pm.getApplicationLabel(optAppInfo.get(i)).toString());
+                if (i != 0 && i % 25 == 0) {
+                    x += 1;
+                }
             }
         }
     }
