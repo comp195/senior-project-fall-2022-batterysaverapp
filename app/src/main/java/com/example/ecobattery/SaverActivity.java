@@ -122,6 +122,16 @@ public class SaverActivity extends AppCompatActivity {
                         appImageView.getLayoutParams().width = 200;
                     }
                 }
+
+                TextView pageTextView = new TextView(v.getContext());
+
+                pageTextView.setText("Optimized Apps");
+
+                pageTextView.setX(0);
+                pageTextView.setY(heightOfContext - 50);
+
+                v.addView(pageTextView);
+
                 pagerAdapter.addView (v, x);
                 pagerAdapter.notifyDataSetChanged();
             }
@@ -180,6 +190,16 @@ public class SaverActivity extends AppCompatActivity {
                         appImageView.getLayoutParams().width = 200;
                     }
                 }
+
+                TextView pageTextView = new TextView(v.getContext());
+
+                pageTextView.setText("Non-Optimized Apps");
+
+                pageTextView.setX(0);
+                pageTextView.setY(heightOfContext - 50);
+
+                v.addView(pageTextView);
+
                 pagerAdapter.addView (v, x + optAppDisplayArray.length);
                 pagerAdapter.notifyDataSetChanged();
             }
@@ -233,7 +253,9 @@ public class SaverActivity extends AppCompatActivity {
                 "com.android.providers.userdictionary",
                 "com.android.location.fused",
                 "com.google.android.ondevicepersonalization.services",
-                "com.android.providers.contacts"
+                "com.android.providers.contacts",
+                "com.google.android.ext.services",
+                "com.google.android.networkstack.tethering"
         };
     }
     
