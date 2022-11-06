@@ -27,5 +27,7 @@ public class Battery {
 
     float batteryPct = level * 100 / (float)scale;
 
+    
+
 
 }
