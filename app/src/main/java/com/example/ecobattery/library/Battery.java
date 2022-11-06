@@ -21,5 +21,11 @@ public class Battery {
     boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
     boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
 
+    //Determine the current battery level
+    int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+    int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+    float batteryPct = level * 100 / (float)scale;
+
 
 }
