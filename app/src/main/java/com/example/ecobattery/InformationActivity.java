@@ -29,11 +29,11 @@ public class InformationActivity extends AppCompatActivity {
         TextView batteryPercentText = (TextView)findViewById(R.id.textView4);
         batteryPercentText.setText("Battery Percentage: " + String.valueOf(BatteryInformation.getBatteryPercentage()));
 
-        TextView isChargingText = (TextView)findViewById(R.id.textView5);
-        isChargingText.setText("Is Charging: " + String.valueOf(BatteryInformation.isCharging()));
+       // TextView isChargingText = (TextView)findViewById(R.id.textView5);
+       // isChargingText.setText("Is Charging: " + String.valueOf(BatteryInformation.isCharging()));
 
-        TextView isLowBatteryText = (TextView)findViewById(R.id.textView6);
-        isLowBatteryText.setText("Is Low Battery: " + String.valueOf(BatteryInformation.isLowBattery()));
+       // TextView isLowBatteryText = (TextView)findViewById(R.id.textView6);
+       // isLowBatteryText.setText("Is Low Battery: " + String.valueOf(BatteryInformation.isLowBattery()));
 
         //TODO Delete, just testing
         // info : adb shell pidof com.google.android.gms <-- checks if process is running
