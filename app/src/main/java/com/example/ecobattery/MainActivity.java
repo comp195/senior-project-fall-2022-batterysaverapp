@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ecobattery.library.BatteryInformation;
+import com.example.ecobattery.library.Optimize;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Optimize optimize = new Optimize();
+        optimize.runOptimization();
         /*
         TODO simplify this code
          */

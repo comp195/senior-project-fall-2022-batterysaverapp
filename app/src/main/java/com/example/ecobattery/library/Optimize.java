@@ -1,9 +1,27 @@
 package com.example.ecobattery.library;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Optimize {
+
+    public void runOptimization() {
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                handler.postDelayed(this,1000);
+            }
+        }, 1000);
+    }
+
 
     public void doOptimization() {
         Process process = null;
