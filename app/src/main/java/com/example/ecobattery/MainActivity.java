@@ -15,12 +15,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Optimize optimize = new Optimize();
-        optimize.runOptimization();
-        /*
-        TODO simplify this code
-         */
         BatteryInformation.setAppContext(getApplicationContext());
+
+        Optimize optimize = new Optimize(this);
+        optimize.runOptimization();
     }
 
     public void batteryInfoScreen(View view) {

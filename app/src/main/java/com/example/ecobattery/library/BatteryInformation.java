@@ -15,6 +15,10 @@ public class BatteryInformation {
         appContext = newContext;
     }
 
+    public static Context getAppContext() {
+        return appContext;
+    }
+
     public static float getBatteryPercentage() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = appContext.registerReceiver(null, intentFilter);
