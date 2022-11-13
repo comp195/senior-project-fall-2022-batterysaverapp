@@ -29,14 +29,8 @@ public class BatteryInformation {
         return (level * 100) / (float)scale;
     }
 
-    /*
-    TODO Calculate estimated time
-    Research suggests we should gather data to analyze.
-    https://stackoverflow.com/questions/30208271/calculating-remaining-time-of-battery-live
-    Consider BatteryManager.computeChargeTimeRemaining() function from API 28
-     */
-    public static int getEstimatedTime() {
-        return -1;
+    public static String getEstimatedTime() {
+        return "Null";
     }
 
     public static boolean isCharging() {
@@ -48,31 +42,32 @@ public class BatteryInformation {
         return status == BatteryManager.BATTERY_STATUS_CHARGING;
     }
 
-    /*
-    TODO Calculate getBatteryPercentage() + extra battery life
-    Some physics calculation to calculate this
-     */
-
-    public static float getBatteryLife() {
-        return -1;
-    }
-
     public static boolean isLowBattery() {
         return getBatteryPercentage() <= LOW_BATTERY_THRESHOLD;
     }
 
-    /*
-    TODO Calculate time to charge
-    Research suggests gather data to analyze.
-    One approach:
-    - Theoretically, battery is at 20%.
-    - Start timer from 21%
-    - End timer at 22%
-    - Multiply 78 by (end-start) time to get "estimate".
-    NOTE: Start timer from 21% because charge from 20% to 21% may vary if it's theoretically 20.9%.
-     */
-    public static int getTimeToCharge() {
-        return -1;
+    public static String getTimeToCharge() {
+        if (!isCharging()) {
+            return "Not Charging";
+        }
+        if (getBatteryPercentage() >= 100) {
+            return "Full Charged";
+        }
+        BatteryManager mBatteryManager = (BatteryManager) appContext.getSystemService(Context.BATTERY_SERVICE);
+
+        long time = -1;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            time = mBatteryManager.computeChargeTimeRemaining();
+        }
+
+        if (time == -1) {
+            return "Needs More Data";
+        } else {
+            int seconds = (int) (time / 1000) % 60 ;
+            int minutes = (int) ((time / (1000*60)) % 60);
+            int hours   = (int) ((time / (1000*60*60)) % 24);
+            return hours + "H " + minutes + "M " + seconds + "S";
+        }
     }
 
 }
