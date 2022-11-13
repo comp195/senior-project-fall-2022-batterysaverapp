@@ -31,5 +31,17 @@ public class InformationActivity extends AppCompatActivity {
         TextView batteryPercentText = (TextView)findViewById(R.id.batteryPercentText);
         batteryPercentText.setText("Battery Percentage : " + BatteryInformation.getBatteryPercentage() + "%");
 
+        TextView estimatedTimeText = (TextView)findViewById(R.id.estimatedTimeText);
+        estimatedTimeText.setText("Estimated Time : " + BatteryInformation.getEstimatedTime());
+
+        TextView isChargingText = (TextView)findViewById(R.id.isChargingText);
+        isChargingText.setText("Is Charging : " + BatteryInformation.isCharging());
+
+        TextView isLowBatteryText = (TextView)findViewById(R.id.isLowBatteryText);
+        isLowBatteryText.setText("Is Low Battery : " + BatteryInformation.isLowBattery());
+
+        TextView timeToChargeText = (TextView)findViewById(R.id.timeToChargeText);
+        timeToChargeText.setText("Time To Charge : " + BatteryInformation.getTimeToCharge());
+
     }
 }
