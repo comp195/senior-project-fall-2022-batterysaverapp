@@ -1,10 +1,13 @@
 package com.example.ecobattery.library;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,8 +18,11 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.ecobattery.MainActivity;
 import com.example.ecobattery.R;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -54,35 +60,33 @@ public class Optimize {
             @Override
             public void run() {
                 if (!isOptimized && BatteryInformation.isLowBattery()) {
+                    List<String> optimizedApps = new OptimizationFileConfig(appContext).getOptimizedPackages();
+                    StringBuilder optimizedNames = new StringBuilder();
+
+                    final PackageManager pm = appContext.getPackageManager();
+                    for (String packages : optimizedApps) {
+                        ApplicationInfo ai;
+                        try {
+                            ai = pm.getApplicationInfo(packages, 0);
+                        } catch (PackageManager.NameNotFoundException e) {
+                            ai = null;
+                        }
+                        optimizedNames.append((String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)")).append("\n");
+                    }
+
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(appContext, "EcoBatteryId")
-                            .setContentTitle("My notification")
+                            .setContentTitle("EcoBattery Optimize")
                             .setSmallIcon(R.drawable.ecobatterypic)
-                            .setContentText("Much longer text that cannot fit one line...")
+                            .setContentText("List of Applications Optimized:")
                             .setStyle(new NotificationCompat.BigTextStyle()
-                                    .bigText("Much longer text that cannot fit one line..."))
+                                    .bigText(optimizedNames))
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(appContext);
 
 // notificationId is a unique int for each notification that you must define
                     notificationManager.notify(5, builder.build());
                     isOptimized = true;
-                    /*
-                    AlertDialog aD = new AlertDialog.Builder(appContext)
-                            .setTitle("Delete entry")
-                            .setMessage("Are you sure you want to delete this entry?")
-
-                            // Specifying a listener allows you to take an action before dismissing the dialog.
-                            // The dialog is automatically dismissed when a dialog button is clicked.
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Continue with delete operation
-                                }
-                            })
-
-                            // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();*/
+                    forceStopApplications();
                 }
                 if (isOptimized && !BatteryInformation.isLowBattery()) {
                     isOptimized = false;
@@ -93,20 +97,35 @@ public class Optimize {
     }
 
 
-    public void doOptimization() {
+    public void forceStopApplications() {
+        ActivityManager aM = (ActivityManager)appContext.getSystemService(Context.ACTIVITY_SERVICE);
+        for (String packageToOptimize : new OptimizationFileConfig(appContext).getOptimizedPackages()) {
+            aM.killBackgroundProcesses(packageToOptimize);
+        }
+        /*
+        //TODO Delete, just testing
+        // info : adb shell pidof com.google.android.gms <-- checks if process is running
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec("adb shell pm list packages");
-            OutputStream outputStream = process.getOutputStream();
-            System.out.println(outputStream.toString());
-            try {
-                process.waitFor();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            for (String packagesToOptimize : new OptimizationFileConfig(appContext).getOptimizedPackages()) {
+                process = Runtime.getRuntime().exec("am force-stop " + packagesToOptimize);
+
+                BufferedReader bufferedReader = new BufferedReader(
+                        new InputStreamReader(process.getInputStream()));
+
+                // Grab the results
+                StringBuilder log = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    log.append(line + "\n");
+                }
+
+                System.out.println("Killing: " + packagesToOptimize);
+                System.out.println(log.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }
