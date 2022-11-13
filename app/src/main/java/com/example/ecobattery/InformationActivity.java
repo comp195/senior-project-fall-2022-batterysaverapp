@@ -9,6 +9,8 @@ import com.example.ecobattery.library.BatteryInformation;
 import com.example.ecobattery.library.OptimizationFileConfig;
 import com.example.ecobattery.library.Optimize;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -26,13 +28,8 @@ public class InformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information_activity);
 
-        TextView batteryPercentText = (TextView)findViewById(R.id.textView4);
-        batteryPercentText.setText("Battery Percentage: " + String.valueOf(BatteryInformation.getBatteryPercentage()));
+        TextView batteryPercentText = (TextView)findViewById(R.id.batteryPercentText);
+        batteryPercentText.setText("Battery Percentage : " + BatteryInformation.getBatteryPercentage() + "%");
 
-       // TextView isChargingText = (TextView)findViewById(R.id.textView5);
-       // isChargingText.setText("Is Charging: " + String.valueOf(BatteryInformation.isCharging()));
-
-       // TextView isLowBatteryText = (TextView)findViewById(R.id.textView6);
-       // isLowBatteryText.setText("Is Low Battery: " + String.valueOf(BatteryInformation.isLowBattery()));
     }
 }
