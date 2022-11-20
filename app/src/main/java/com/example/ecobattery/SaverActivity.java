@@ -102,8 +102,8 @@ public class SaverActivity extends AppCompatActivity {
 
                         TextView appTextView = new TextView(v.getContext());
 
-                        appTextView.setText(optAppDisplayArray[x][y].getName());
-
+                        appTextView.setText(optAppDisplayArray[x][y].getName().replace(' ', '\n'));
+                        appTextView.setWidth(widthApp);
                         appTextView.setX(currentX);
                         appTextView.setY(currentY + ((float) heightApp / 2));
 
@@ -170,8 +170,8 @@ public class SaverActivity extends AppCompatActivity {
 
                         TextView appTextView = new TextView(v.getContext());
 
-                        appTextView.setText(allAppDisplayArray[x][y].getName());
-
+                        appTextView.setText(allAppDisplayArray[x][y].getName().replace(' ', '\n'));
+                        appTextView.setWidth(widthApp);
                         appTextView.setX(currentX);
                         appTextView.setY(currentY + ((float) heightApp / 2));
 
@@ -255,7 +255,8 @@ public class SaverActivity extends AppCompatActivity {
                 "com.google.android.ondevicepersonalization.services",
                 "com.android.providers.contacts",
                 "com.google.android.ext.services",
-                "com.google.android.networkstack.tethering"
+                "com.google.android.networkstack.tethering",
+                "com.example.ecobattery"
         };
     }
     
