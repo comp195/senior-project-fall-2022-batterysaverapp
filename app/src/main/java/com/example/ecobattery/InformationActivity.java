@@ -30,18 +30,34 @@ public class InformationActivity extends AppCompatActivity {
 
         TextView batteryPercentText = (TextView)findViewById(R.id.batteryPercentText);
         batteryPercentText.setText("Battery Percentage : " + BatteryInformation.getBatteryPercentage() + "%");
-
+        //TODO chart for %?
         TextView estimatedTimeText = (TextView)findViewById(R.id.estimatedTimeText);
         estimatedTimeText.setText("Estimated Time : " + BatteryInformation.getEstimatedTime());
 
         TextView isChargingText = (TextView)findViewById(R.id.isChargingText);
-        isChargingText.setText("Is Charging : " + BatteryInformation.isCharging());
+        String isChargingMessage = "OFF";
+        boolean isChargingBool = BatteryInformation.isCharging();
+        if (isChargingBool) {
+            isChargingMessage = "ON";
+        }
+        isChargingText.setText("Is Charging : " + isChargingMessage);
 
         TextView isLowBatteryText = (TextView)findViewById(R.id.isLowBatteryText);
-        isLowBatteryText.setText("Is Low Battery : " + BatteryInformation.isLowBattery());
+        String isLowBatteryMessage = "OFF";
+        boolean isLowBatteryBool = BatteryInformation.isLowBattery();
+        if (isLowBatteryBool) {
+            isLowBatteryMessage = "ON";
+        }
+        isLowBatteryText.setText("Is Low Battery : " + isLowBatteryMessage);
 
         TextView timeToChargeText = (TextView)findViewById(R.id.timeToChargeText);
         timeToChargeText.setText("Time To Charge : " + BatteryInformation.getTimeToCharge());
 
     }
+    /*TODO not for this page, think of test plan
+    - buttons?
+    - edge cases?
+    - user takes x action, expected output is y
+    - installation (on android device)
+    * */
 }
