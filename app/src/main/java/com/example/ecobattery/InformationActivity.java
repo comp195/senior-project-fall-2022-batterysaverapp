@@ -3,6 +3,7 @@ package com.example.ecobattery;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.ecobattery.library.BatteryInformation;
@@ -30,9 +31,9 @@ public class InformationActivity extends AppCompatActivity {
 
         TextView batteryPercentText = (TextView)findViewById(R.id.batteryPercentText);
         batteryPercentText.setText("Battery Percentage : " + BatteryInformation.getBatteryPercentage() + "%");
-        //TODO chart for %?
-        TextView estimatedTimeText = (TextView)findViewById(R.id.estimatedTimeText);
-        estimatedTimeText.setText("Estimated Time : " + BatteryInformation.getEstimatedTime());
+
+        ProgressBar batteryPercentBar = (ProgressBar)findViewById(R.id.progressBar);
+        batteryPercentBar.setProgress((int) BatteryInformation.getBatteryPercentage());
 
         TextView isChargingText = (TextView)findViewById(R.id.isChargingText);
         String isChargingMessage = "OFF";

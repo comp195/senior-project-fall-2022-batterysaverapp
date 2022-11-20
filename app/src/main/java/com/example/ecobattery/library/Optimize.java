@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Optimize {
-
+    //TODO sort non-optimized apps by cpu usage
     private boolean isOptimized = false;
 
     private Context appContext;
