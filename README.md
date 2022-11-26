@@ -36,5 +36,6 @@ The following are the features of the application:
 None as of now but will be incorporated during the semester
 had a hard time figuring out vcs
 mah figured
-Issues with running application 
+Issues with running application on an actual android device. 
+Team might use the emulator to present the application.
 
