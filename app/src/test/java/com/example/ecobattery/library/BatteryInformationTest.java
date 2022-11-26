@@ -7,15 +7,8 @@ import org.junit.jupiter.api.Test;
 class BatteryInformationTest {
 
     @Test
-    void setAppContext() {
-    }
-
-    @Test
-    void getAppContext() {
-    }
-
-    @Test
     void getBatteryPercentage() {
+
     }
 
     @Test
