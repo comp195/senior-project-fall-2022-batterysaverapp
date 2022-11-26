@@ -8,7 +8,6 @@ class BatteryInformationTest {
 
     @Test
     void getBatteryPercentage() {
-
     }
 
     @Test
