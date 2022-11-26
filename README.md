@@ -26,6 +26,10 @@ These are the project components in general:
     Time: Each task durations will span around 2 weeks and they will be titled snapshots, gantts chart will be used for schedule management
     Money: There is no funding required for the application
     Scope: Day to Day android mobile users.
+    
+The following are the features of the application:
+    1. The main screen: The main screen has two buttons, battery saver mode and battery information, clicking on each one of them will take the user to the appropriate option that the user selected
+    2. Battery Saver Mode: This feature enables the android mobile phone 
 
 # Special notes
 None as of now but will be incorporated during the semester
