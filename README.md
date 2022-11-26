@@ -30,10 +30,11 @@ These are the project components in general:
 The following are the features of the application:
     1. The main screen: The main screen has two buttons, battery saver mode and battery information, clicking on each one of them will take the user to the appropriate option that the user selected
     2. Battery Saver Mode: This feature enables the android mobile phone users to save battery by killing certain apps that the user can choose. Entering this mode will also enable the phone to send notifications to the user telling them about the low battery
-    3. Battery Information: This feature will enable 
+    3. Battery Information: This feature will enable user to view current information about the battery.
 
 # Special notes
 None as of now but will be incorporated during the semester
 had a hard time figuring out vcs
 mah figured
+Issues with running application 
 
