@@ -4,8 +4,6 @@ import android.content.Context;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -14,9 +12,8 @@ import java.util.List;
 
 public class OptimizationFileConfig {
 
-    private File file;
     private List<String> optimizedPackages;
-    private Context appContext;
+    private final Context appContext;
 
     public OptimizationFileConfig(Context appContext) {
         this.appContext = appContext;
@@ -28,7 +25,7 @@ public class OptimizationFileConfig {
     }
 
     private void initializeFile() {
-        file = new File(appContext.getFilesDir(), "optimized_packages.txt");
+        File file = new File(appContext.getFilesDir(), "optimized_packages.txt");
         optimizedPackages = new ArrayList<>();
         if (!file.exists()) {
             try {

@@ -1,11 +1,8 @@
 package com.example.ecobattery.library;
 
-import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -15,7 +12,6 @@ import android.os.Looper;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.ecobattery.MainActivity;
 import com.example.ecobattery.R;
 
 import java.io.BufferedReader;
@@ -30,7 +26,7 @@ public class Optimize {
     //TODO sort non-optimized apps by cpu usage
     private boolean isOptimized = false;
 
-    private Context appContext;
+    private final Context appContext;
 
     public Optimize(Context appContext) {
         this.appContext = appContext;
@@ -98,13 +94,6 @@ public class Optimize {
 
 
     public void forceStopApplications() {
-        ActivityManager aM = (ActivityManager)appContext.getSystemService(Context.ACTIVITY_SERVICE);
-        for (String packageToOptimize : new OptimizationFileConfig(appContext).getOptimizedPackages()) {
-            aM.killBackgroundProcesses(packageToOptimize);
-        }
-        /*
-        //TODO Delete, just testing
-        // info : adb shell pidof com.google.android.gms <-- checks if process is running
         Process process = null;
         try {
             for (String packagesToOptimize : new OptimizationFileConfig(appContext).getOptimizedPackages()) {
@@ -113,19 +102,15 @@ public class Optimize {
                 BufferedReader bufferedReader = new BufferedReader(
                         new InputStreamReader(process.getInputStream()));
 
-                // Grab the results
                 StringBuilder log = new StringBuilder();
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
-                    log.append(line + "\n");
+                    log.append(line).append("\n");
                 }
-
-                System.out.println("Killing: " + packagesToOptimize);
-                System.out.println(log.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
 }

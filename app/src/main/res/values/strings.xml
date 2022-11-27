@@ -3,18 +3,11 @@
     <string name="battery_information">Battery Information</string>
     <string name="battery_saver_mode">Battery Saver Mode</string>
     <string name="ecobattery">ECOBATTERY</string>
-    <string name="todo">TODO</string>
     <string name="battery_information_page">Battery Information Page</string>
-    <string name="battery_life">Battery Life</string>
-    <string name="battery_percentage">Battery Percentage</string>
-    <string name="is_charging">Is Charging</string>
-    <string name="is_low_battery">Is Low Battery</string>
-    <string name="todo1">TODO</string>
-    <string name="red">red</string>
-    <string name="blue">bloo</string>
-    <string name="green">shrek</string>
-    <string name="app_view">Applications</string>
-    <string name="second_view">Second View</string>
-    <string name="swipe_left_to_nfirst_view">Swipe left to\nFirst View</string>
-    <string name="swipe_right_to_nthird_view">Swipe right to\nThird View</string>
+    <string name="na">N/a</string>
+    <string name="battery_percentage">Battery Percentage : </string>
+    <string name="is_charging">Is Charging : </string>
+    <string name="is_low_battery">Is Low Battery : </string>
+    <string name="time_to_charge">Time To Charge : </string>
+    <string name="background">Background</string>
 </resources>

@@ -7,22 +7,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.ecobattery.library.BatteryInformation;
-import com.example.ecobattery.library.OptimizationFileConfig;
-import com.example.ecobattery.library.Optimize;
-
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 
 public class InformationActivity extends AppCompatActivity {
-
-    /*
-    TODO: Consider live update on information
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,29 +16,29 @@ public class InformationActivity extends AppCompatActivity {
         setContentView(R.layout.information_activity);
 
         TextView batteryPercentText = (TextView)findViewById(R.id.batteryPercentText);
-        batteryPercentText.setText("Battery Percentage : " + BatteryInformation.getBatteryPercentage() + "%");
+        batteryPercentText.setText(BatteryInformation.getBatteryPercentage() + "%");
 
         ProgressBar batteryPercentBar = (ProgressBar)findViewById(R.id.progressBar);
         batteryPercentBar.setProgress((int) BatteryInformation.getBatteryPercentage());
 
         TextView isChargingText = (TextView)findViewById(R.id.isChargingText);
-        String isChargingMessage = "OFF";
+        String isChargingMessage = "NO";
         boolean isChargingBool = BatteryInformation.isCharging();
         if (isChargingBool) {
-            isChargingMessage = "ON";
+            isChargingMessage = "YES";
         }
-        isChargingText.setText("Is Charging : " + isChargingMessage);
+        isChargingText.setText(isChargingMessage);
 
         TextView isLowBatteryText = (TextView)findViewById(R.id.isLowBatteryText);
-        String isLowBatteryMessage = "OFF";
+        String isLowBatteryMessage = "NO";
         boolean isLowBatteryBool = BatteryInformation.isLowBattery();
         if (isLowBatteryBool) {
-            isLowBatteryMessage = "ON";
+            isLowBatteryMessage = "YES";
         }
-        isLowBatteryText.setText("Is Low Battery : " + isLowBatteryMessage);
+        isLowBatteryText.setText(isLowBatteryMessage);
 
         TextView timeToChargeText = (TextView)findViewById(R.id.timeToChargeText);
-        timeToChargeText.setText("Time To Charge : " + BatteryInformation.getTimeToCharge());
+        timeToChargeText.setText(BatteryInformation.getTimeToCharge());
 
     }
     /*TODO not for this page, think of test plan

@@ -15,10 +15,6 @@ public class BatteryInformation {
         appContext = newContext;
     }
 
-    public static Context getAppContext() {
-        return appContext;
-    }
-
     public static float getBatteryPercentage() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = appContext.registerReceiver(null, intentFilter);
@@ -27,10 +23,6 @@ public class BatteryInformation {
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
         return (level * 100) / (float)scale;
-    }
-
-    public static String getEstimatedTime() {
-        return "Null";
     }
 
     public static boolean isCharging() {
@@ -48,10 +40,10 @@ public class BatteryInformation {
 
     public static String getTimeToCharge() {
         if (!isCharging()) {
-            return "Not Charging";
+            return "NOT CHARGING";
         }
         if (getBatteryPercentage() >= 100) {
-            return "Full Charged";
+            return "FULL CHARGED";
         }
         BatteryManager mBatteryManager = (BatteryManager) appContext.getSystemService(Context.BATTERY_SERVICE);
 
@@ -61,7 +53,7 @@ public class BatteryInformation {
         }
 
         if (time == -1) {
-            return "Needs More Data";
+            return "NEEDS MORE DATA";
         } else {
             int seconds = (int) (time / 1000) % 60 ;
             int minutes = (int) ((time / (1000*60)) % 60);

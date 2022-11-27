@@ -299,7 +299,6 @@ public class SaverActivity extends AppCompatActivity {
             int x = 0;
             for (int i = 0; i < allAppInfo.size(); i++) {
                 allAppDisplayArray[x][i % 25] = new DisplayApp(allAppInfo.get(i).packageName,
-                        false,
                         pm.getApplicationIcon(allAppInfo.get(i)),
                         pm.getApplicationLabel(allAppInfo.get(i)).toString());
                 if (i != 0 && i % 25 == 0) {
@@ -315,7 +314,6 @@ public class SaverActivity extends AppCompatActivity {
             int x = 0;
             for (int i = 0; i < optAppInfo.size(); i++) {
                 optAppDisplayArray[x][i % 25] = new DisplayApp(optAppInfo.get(i).packageName,
-                        false,
                         pm.getApplicationIcon(optAppInfo.get(i)),
                         pm.getApplicationLabel(optAppInfo.get(i)).toString());
                 if (i != 0 && i % 25 == 0) {
@@ -325,23 +323,4 @@ public class SaverActivity extends AppCompatActivity {
         }
     }
 
-    public void addView (View newPage) {
-        int pageIndex = pagerAdapter.addView (newPage);
-        pager.setCurrentItem (pageIndex, true);
-    }
-
-    public void removeView (View defunctPage) {
-        int pageIndex = pagerAdapter.removeView (pager, defunctPage);
-        if (pageIndex == pagerAdapter.getCount())
-            pageIndex--;
-        pager.setCurrentItem (pageIndex);
-    }
-
-    public View getCurrentPage () {
-        return pagerAdapter.getView (pager.getCurrentItem());
-    }
-
-    public void setCurrentPage (View pageToShow) {
-        pager.setCurrentItem (pagerAdapter.getItemPosition (pageToShow), true);
-    }
 }
