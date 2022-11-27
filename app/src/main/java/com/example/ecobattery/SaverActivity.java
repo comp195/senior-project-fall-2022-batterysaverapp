@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,6 +103,8 @@ public class SaverActivity extends AppCompatActivity {
 
                         TextView appTextView = new TextView(v.getContext());
 
+                        appTextView.setTextColor(Color.WHITE);
+                        appTextView.setAllCaps(true);
                         appTextView.setText(optAppDisplayArray[x][y].getName().replace(' ', '\n'));
                         appTextView.setWidth(widthApp);
                         appTextView.setX(currentX);
@@ -125,6 +128,8 @@ public class SaverActivity extends AppCompatActivity {
 
                 TextView pageTextView = new TextView(v.getContext());
 
+                pageTextView.setTextColor(Color.WHITE);
+                pageTextView.setAllCaps(true);
                 pageTextView.setText("Optimized Apps");
 
                 pageTextView.setX(0);
@@ -170,6 +175,8 @@ public class SaverActivity extends AppCompatActivity {
 
                         TextView appTextView = new TextView(v.getContext());
 
+                        appTextView.setTextColor(Color.WHITE);
+                        appTextView.setAllCaps(true);
                         appTextView.setText(allAppDisplayArray[x][y].getName().replace(' ', '\n'));
                         appTextView.setWidth(widthApp);
                         appTextView.setX(currentX);
@@ -193,6 +200,8 @@ public class SaverActivity extends AppCompatActivity {
 
                 TextView pageTextView = new TextView(v.getContext());
 
+                pageTextView.setTextColor(Color.WHITE);
+                pageTextView.setAllCaps(true);
                 pageTextView.setText("Non-Optimized Apps");
 
                 pageTextView.setX(0);
