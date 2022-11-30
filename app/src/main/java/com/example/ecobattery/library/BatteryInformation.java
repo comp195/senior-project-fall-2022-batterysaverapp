@@ -7,6 +7,8 @@ import android.os.BatteryManager;
 
 public class BatteryInformation {
 
+    //TODO possibly load images for yes/no
+
     private static Context appContext;
 
     private static final int LOW_BATTERY_THRESHOLD = 20;
