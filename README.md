@@ -4,6 +4,9 @@
 ###  Mah Noor (m_noor@u.pacific.edu)
 ###  Andrew Kim (a_kim86@u.pacific.edu)
 
+# Project executable
+Here is a compiled, executable android application: [EcoBattery](https://github.com/comp195/senior-project-fall-2022-batterysaverapp/blob/main/EcoBattery-debug.apk)
+
 # Project description
 
 EcoBattery will be an android application used to help users maximize conservation of their batteries. The application will display essential battery data and provide the functionality to keep other applications enabled or disabled while in use. While Android devices have built-in features to preserve battery, our application will help to maintain battery more efficiently, whether it be an old or slow Android device, while the user is traveling or sleeping, etc.
