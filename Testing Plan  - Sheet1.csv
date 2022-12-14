@@ -1,0 +1,29 @@
+Testing Class: Battery Information,,,,,,,,
+Test Round: 1,,,Test Round: 2,,,Test Round: 3,,
+,Expected,Actual,,Expected,Actual,,Expected,Actual
+"Can you open
+Battery Information menu?",YES,YES,"Can you open
+Battery Information menu?",YES,YES,"Can you open
+Battery Information menu?",YES,YES
+Battery Percentage,13%,13%,Battery Percentage,21%,21%,Battery Percentage,10%,10%
+Is the phone charging?,YES,YES,Is the phone charging?,NO,NO,Is the phone charging?,NO,NO
+Is the phone battery low?,YES,YES,Is the phone battery low?,NO,NO,Is the phone battery low?,YES,YES
+"Can you open
+Battery Optimization menu?",YES,YES,"Can you open
+Battery Optimization menu?",YES,YES,"Can you open
+Battery Optimization menu?",YES,YES
+"Does application selection work when
+moving Snapchat from optimized
+to not optimized?",YES,YES,"Does application selection work when
+moving Gmail from not optimized
+to optimized?",YES,YES,"Does application selection work when
+moving Chrome from optimized
+to not optimized?",YES,YES
+"Does notification and optimization
+occur when battery drops below 15%?",NO,NO,"Does notification and optimization
+occur when battery drops below 15%?",YES,YES,"Does notification and optimization
+occur when battery drops below 15%?",NO,NO
+"Can you go back to
+Main menu?",YES,YES,"Can you go back to
+Main menu?",YES,YES,"Can you go back to
+Main menu?",YES,YES
